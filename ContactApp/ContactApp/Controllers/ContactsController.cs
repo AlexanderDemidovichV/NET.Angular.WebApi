@@ -1,13 +1,6 @@
 ﻿using ContactApp.Models;
 using ContactApp.Services;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -26,7 +19,7 @@ namespace ContactApp.Controllers
         // GET: api/Contacts/5
         public IHttpActionResult Get(int id)
         {
-            var contact = ContactsService.Instance.GetContacts().FirstOrDefault((p) => p.Id == id);
+            var contact = ContactsService.Instance.GetContacts().FirstOrDefault((c) => c.Id == id);
             if (contact == null)
             {
                 return NotFound();

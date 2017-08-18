@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace ContactApp.Models
 {
-    public class Contact: ICloneable
+    public class Contact : ICloneable
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string DOB { get; set; }
+        public DateTime DOB { get; set; }
         public string PhoneNumber { get; set; }
+        public char Gender { get; set; }
         public bool Favorite { get; set; }
         public bool SelectedToDelete { get; set; }
         public string Relationship { get; set; }
@@ -25,6 +23,7 @@ namespace ContactApp.Models
                 FirstName = this.FirstName,
                 DOB = this.DOB,
                 PhoneNumber = this.PhoneNumber,
+                Gender = this.Gender,
                 Favorite = this.Favorite,
                 SelectedToDelete = this.SelectedToDelete,
                 Relationship = this.Relationship,
@@ -39,7 +38,7 @@ namespace ContactApp.Models
 
         public bool Equals(Contact contact)
         {
-            if((contact.Id == this.Id) && (contact.FirstName == this.FirstName) && (contact.LastName == this.LastName) 
+            if ((contact.Id == this.Id) && (contact.FirstName == this.FirstName) && (contact.LastName == this.LastName)
                 && (contact.Favorite == this.Favorite) && (contact.Favorite == this.Favorite) &&
                 (contact.PhoneNumber == this.PhoneNumber) && (contact.Relationship == this.Relationship) && (contact.Favorite == this.Favorite) &&
                 (contact.DOB == this.DOB) && (contact.Description == this.Description))
@@ -47,6 +46,11 @@ namespace ContactApp.Models
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return (int.Parse(PhoneNumber) * Id) % 13;
         }
     }
 }
